@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+build/
+dist/
+out/
+bin/
+obj/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.so
+*.dll
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# AI assistant config
+.claude/
+CLAUDE.md

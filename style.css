@@ -1,0 +1,283 @@
+:root {
+    /* Color Palette - Pastel Colors */
+    --color-bg: #f8fafc;
+    --color-text-main: #1e293b;
+    --color-text-muted: #64748b;
+    --color-border: #e2e8f0;
+    --color-header-bg: #ffffff;
+    
+    --color-subject-1: #e0f2fe; /* Light Blue */
+    --color-subject-2: #dcfce7; /* Light Green */
+    --color-subject-3: #fce7f3; /* Light Pink */
+    --color-subject-4: #fef08a; /* Light Yellow */
+    --color-subject-5: #ede9fe; /* Light Purple */
+    --color-break: #f1f5f9;     /* Light Grey */
+
+    --color-subject-1-border: #7dd3fc;
+    --color-subject-2-border: #86efac;
+    --color-subject-3-border: #f9a8d4;
+    --color-subject-4-border: #fde047;
+    --color-subject-5-border: #c4b5fd;
+    --color-break-border: #cbd5e1;
+
+    --color-current-time: #ef4444; /* Red for current time line */
+
+    /* Typography */
+    --font-family: 'Inter', sans-serif;
+
+    /* Grid Layout Variables */
+    --time-column-width: 80px;
+    --row-height: 60px; /* 1 row = 30 minutes */
+    --days-count: 5;
+    
+    /* Box Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    line-height: 1.5;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.dashboard-header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-size: 0.875rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+}
+
+.btn-outline:hover {
+    background: var(--color-border);
+}
+
+/* Timetable Container */
+.timetable-wrapper {
+    background: var(--color-header-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    flex: 1;
+}
+
+.timetable-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 800px; /* Minimum width to prevent crushing columns */
+    overflow-x: auto;
+}
+
+/* Timetable Header (Days) */
+.timetable-header {
+    display: grid;
+    grid-template-columns: var(--time-column-width) repeat(var(--days-count), 1fr);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.time-column-header {
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-align: center;
+    border-right: 1px solid var(--color-border);
+}
+
+.day-header {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text-main);
+    border-right: 1px solid var(--color-border);
+}
+.day-header:last-child {
+    border-right: none;
+}
+
+/* Timetable Body (Grid) */
+.timetable-body {
+    display: grid;
+    /* CSS variables --num-rows will be injected via JS */
+    grid-template-columns: var(--time-column-width) repeat(var(--days-count), 1fr);
+    grid-template-rows: repeat(var(--num-rows, 20), var(--row-height));
+    position: relative;
+    background-color: #fff;
+}
+
+/* Background Grid Lines */
+.grid-cell {
+    border-bottom: 1px dashed var(--color-border);
+    border-right: 1px solid var(--color-border);
+    /* For horizontal lines */
+}
+
+/* Time Labels Column */
+.time-label {
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid transparent; /* Align with cells */
+    position: relative;
+    top: -0.75rem; /* Align text with the line */
+}
+
+/* Schedule Card */
+.schedule-card {
+    margin: 4px; /* Spacious layout with gaps */
+    padding: 0.75rem;
+    border-radius: 12px;
+    border-left: 4px solid;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease-in-out;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.schedule-card:active {
+    cursor: grabbing;
+}
+
+.schedule-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--shadow-md);
+    z-index: 3;
+}
+
+/* Card Content Typography */
+.card-subject {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    color: #111827;
+}
+
+.card-time, .card-teacher {
+    font-size: 0.75rem;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.card-time {
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+/* Colors for specific subjects dynamically applied via classes */
+.bg-subject-1 { background-color: var(--color-subject-1); border-left-color: var(--color-subject-1-border); }
+.bg-subject-2 { background-color: var(--color-subject-2); border-left-color: var(--color-subject-2-border); }
+.bg-subject-3 { background-color: var(--color-subject-3); border-left-color: var(--color-subject-3-border); }
+.bg-subject-4 { background-color: var(--color-subject-4); border-left-color: var(--color-subject-4-border); }
+.bg-subject-5 { background-color: var(--color-subject-5); border-left-color: var(--color-subject-5-border); }
+
+/* Break Styling */
+.schedule-card.type-break {
+    background-color: var(--color-break);
+    border-left-color: var(--color-break-border);
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border-left-width: 0;
+    border: 1px dashed var(--color-break-border);
+    opacity: 0.8;
+}
+.type-break .card-subject {
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Current Time Line Indicator */
+.current-time-line {
+    position: absolute;
+    left: var(--time-column-width);
+    right: 0;
+    height: 2px;
+    background-color: var(--color-current-time);
+    z-index: 5;
+    pointer-events: none;
+    box-shadow: 0 0 4px rgba(239, 68, 68, 0.5);
+}
+
+.current-time-line::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-current-time);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Timetable Dashboard</title>
+    <!-- Use a modern sans-serif font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>Weekly Schedule Dashboard</h1>
+                <p class="subtitle">AI Timetable Generator</p>
+            </div>
+            <div class="header-actions">
+                <button id="current-time-btn" class="btn btn-outline">Go to Current Time</button>
+            </div>
+        </header>
+        
+        <main class="timetable-wrapper">
+            <div class="timetable-container">
+                <!-- Top Header Row for Days -->
+                <div class="timetable-header">
+                    <div class="time-column-header">Time</div>
+                    <div class="day-header">Monday</div>
+                    <div class="day-header">Tuesday</div>
+                    <div class="day-header">Wednesday</div>
+                    <div class="day-header">Thursday</div>
+                    <div class="day-header">Friday</div>
+                </div>
+
+                <!-- Main Grid Body -->
+                <div class="timetable-body" id="timetable-body">
+                    <!-- The time labels, horizontal grid lines, and schedule cards will be dynamically injected here via JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
